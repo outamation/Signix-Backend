@@ -41,5 +41,30 @@ namespace Signix.Entities.Entities
         // Navigation properties
         [JsonIgnore]
         public virtual ICollection<SigningRoom> SigningRooms { get; set; } = new List<SigningRoom>();
+
+        // Authentication & Authorization navigation properties
+        [JsonIgnore]
+        [InverseProperty("CreatedBy")]
+        public virtual ICollection<Role> RoleCreatedBies { get; set; } = new List<Role>();
+
+        [JsonIgnore]
+        [InverseProperty("ModifiedBy")]
+        public virtual ICollection<Role> RoleModifiedBies { get; set; } = new List<Role>();
+
+        [JsonIgnore]
+        [InverseProperty("User")]
+        public virtual ICollection<UserRole> UserRoleUsers { get; set; } = new List<UserRole>();
+
+        [JsonIgnore]
+        [InverseProperty("CreatedBy")]
+        public virtual ICollection<UserRole> UserRoleCreatedBies { get; set; } = new List<UserRole>();
+
+        [JsonIgnore]
+        [InverseProperty("ModifiedBy")]
+        public virtual ICollection<UserRole> UserRoleModifiedBies { get; set; } = new List<UserRole>();
+
+        [JsonIgnore]
+        [InverseProperty("User")]
+        public virtual ICollection<UserModule> UserModules { get; set; } = new List<UserModule>();
     }
 }

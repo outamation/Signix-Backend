@@ -7,11 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Signix.Entities.Entities;
 
-namespace VIA.IAM.Entities;
+namespace Signix.Entities.Entities;
 
-[Index("UniqueId", Name = "IDX_UserRoles_UniqueId")]
-[Index("UserId", Name = "IDX_UserRoles_UserId")]
-[Index("UserId", "RoleId", Name = "UQ_UserRoles_UserId_RoleId", IsUnique = true)]
 public partial class UserRole
 {
     [Key]
@@ -42,5 +39,8 @@ public partial class UserRole
     [ForeignKey("UserId")]
     [InverseProperty("UserRoleUsers")]
     public virtual User User { get; set; } = null!;
-   
+
+    [ForeignKey("RoleId")]
+    [InverseProperty("UserRoles")]
+    public virtual Role Role { get; set; } = null!;
 }

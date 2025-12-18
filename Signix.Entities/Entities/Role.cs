@@ -5,17 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using VIA.IAM.Entities;
 
 namespace Signix.Entities.Entities;
 
-[Index("CreatedById", Name = "IDX_Roles_CreatedById")]
-[Index("CreatedDateTime", Name = "IDX_Roles_CreatedDateTime")]
-[Index("IsActive", Name = "IDX_Roles_IsActive")]
-[Index("ModifiedById", Name = "IDX_Roles_ModifiedById")]
-[Index("Name", Name = "IDX_Roles_Name")]
-[Index("Name", Name = "IDX_Roles_Name", IsUnique = true)]
-[Index("Name", Name = "UQ_Roles_Name", IsUnique = true)]
 public partial class Role
 {
     [Key]

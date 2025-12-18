@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Signix.Entities.Context;
@@ -11,9 +12,11 @@ using Signix.Entities.Context;
 namespace Signix.Entities.Migrations
 {
     [DbContext(typeof(SignixDbContext))]
-    partial class SignixDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250906085927_authenticationSetup")]
+    partial class authenticationSetup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -188,222 +191,6 @@ namespace Signix.Entities.Migrations
                         .HasName("pk_document_statuses");
 
                     b.ToTable("document_statuses", (string)null);
-                });
-
-            modelBuilder.Entity("Signix.Entities.Entities.Module", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(900)
-                        .HasColumnType("character varying(900)")
-                        .HasColumnName("code");
-
-                    b.Property<int>("DisplayOrder")
-                        .HasColumnType("integer")
-                        .HasColumnName("display_order");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_active");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(900)
-                        .HasColumnType("character varying(900)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id")
-                        .HasName("pk_modules");
-
-                    b.HasIndex("Code")
-                        .IsUnique()
-                        .HasDatabaseName("ix_modules_code");
-
-                    b.HasIndex("IsActive")
-                        .HasDatabaseName("ix_modules_is_active");
-
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("ix_modules_name");
-
-                    b.ToTable("modules", (string)null);
-                });
-
-            modelBuilder.Entity("Signix.Entities.Entities.Permission", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(900)
-                        .HasColumnType("character varying(900)")
-                        .HasColumnName("code");
-
-                    b.Property<DateTimeOffset?>("CreatedDateTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date_time");
-
-                    b.Property<int>("DisplayOrder")
-                        .HasColumnType("integer")
-                        .HasColumnName("display_order");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_active");
-
-                    b.Property<bool>("IsForServicePrincipal")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_for_service_principal");
-
-                    b.Property<bool?>("IsForTenant")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_for_tenant");
-
-                    b.Property<bool>("IsForUser")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_for_user");
-
-                    b.Property<int>("ModuleId")
-                        .HasColumnType("integer")
-                        .HasColumnName("module_id");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(900)
-                        .HasColumnType("character varying(900)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id")
-                        .HasName("pk_permissions");
-
-                    b.HasIndex("Code")
-                        .IsUnique()
-                        .HasDatabaseName("ix_permissions_code");
-
-                    b.HasIndex("IsActive")
-                        .HasDatabaseName("ix_permissions_is_active");
-
-                    b.HasIndex("IsForServicePrincipal")
-                        .HasDatabaseName("ix_permissions_is_for_service_principal");
-
-                    b.HasIndex("IsForUser")
-                        .HasDatabaseName("ix_permissions_is_for_user");
-
-                    b.HasIndex("ModuleId")
-                        .HasDatabaseName("ix_permissions_module_id");
-
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("ix_permissions_name");
-
-                    b.ToTable("permissions", (string)null);
-                });
-
-            modelBuilder.Entity("Signix.Entities.Entities.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("integer")
-                        .HasColumnName("created_by_id");
-
-                    b.Property<DateTimeOffset?>("CreatedDateTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date_time");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_active");
-
-                    b.Property<bool>("IsEditable")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_editable");
-
-                    b.Property<bool>("IsForServicePrincipal")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_for_service_principal");
-
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer")
-                        .HasColumnName("modified_by_id");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .IsUnicode(false)
-                        .HasColumnType("character varying(256)")
-                        .HasColumnName("name");
-
-                    b.HasKey("Id")
-                        .HasName("pk_roles");
-
-                    b.HasIndex("CreatedById")
-                        .HasDatabaseName("ix_roles_created_by_id");
-
-                    b.HasIndex("CreatedDateTime")
-                        .HasDatabaseName("ix_roles_created_date_time");
-
-                    b.HasIndex("IsActive")
-                        .HasDatabaseName("ix_roles_is_active");
-
-                    b.HasIndex("ModifiedById")
-                        .HasDatabaseName("ix_roles_modified_by_id");
-
-                    b.HasIndex("Name")
-                        .IsUnique()
-                        .HasDatabaseName("ix_roles_name");
-
-                    b.ToTable("roles", (string)null);
-                });
-
-            modelBuilder.Entity("Signix.Entities.Entities.RolePermission", b =>
-                {
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer")
-                        .HasColumnName("role_id");
-
-                    b.Property<int>("PermissionId")
-                        .HasColumnType("integer")
-                        .HasColumnName("permission_id");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean")
-                        .HasColumnName("is_active");
-
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer")
-                        .HasColumnName("modified_by_id");
-
-                    b.HasKey("RoleId", "PermissionId")
-                        .HasName("pk_role_permissions");
-
-                    b.HasIndex("ModifiedById")
-                        .HasDatabaseName("ix_role_permissions_modified_by_id");
-
-                    b.HasIndex("PermissionId")
-                        .HasDatabaseName("ix_role_permissions_permission_id");
-
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_role_permissions_role_id");
-
-                    b.ToTable("role_permissions", (string)null);
                 });
 
             modelBuilder.Entity("Signix.Entities.Entities.SignLog", b =>
@@ -618,106 +405,6 @@ namespace Signix.Entities.Migrations
                     b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("Signix.Entities.Entities.UserModule", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer")
-                        .HasColumnName("modified_by_id");
-
-                    b.Property<int>("ModuleId")
-                        .HasColumnType("integer")
-                        .HasColumnName("module_id");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id")
-                        .HasName("pk_user_modules");
-
-                    b.HasIndex("ModifiedById")
-                        .HasDatabaseName("ix_user_modules_modified_by_id");
-
-                    b.HasIndex("ModuleId")
-                        .HasDatabaseName("ix_user_modules_module_id");
-
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_user_modules_user_id");
-
-                    b.HasIndex("UserId", "ModuleId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_user_modules_user_id_module_id");
-
-                    b.ToTable("user_modules", (string)null);
-                });
-
-            modelBuilder.Entity("Signix.Entities.Entities.UserRole", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CreatedById")
-                        .HasColumnType("integer")
-                        .HasColumnName("created_by_id");
-
-                    b.Property<DateTimeOffset>("CreatedDateTime")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date_time");
-
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer")
-                        .HasColumnName("modified_by_id");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer")
-                        .HasColumnName("role_id");
-
-                    b.Property<string>("UniqueId")
-                        .HasMaxLength(20)
-                        .IsUnicode(false)
-                        .HasColumnType("character varying(20)")
-                        .HasColumnName("unique_id");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer")
-                        .HasColumnName("user_id");
-
-                    b.HasKey("Id")
-                        .HasName("pk_user_roles");
-
-                    b.HasIndex("CreatedById")
-                        .HasDatabaseName("ix_user_roles_created_by_id");
-
-                    b.HasIndex("ModifiedById")
-                        .HasDatabaseName("ix_user_roles_modified_by_id");
-
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_user_roles_role_id");
-
-                    b.HasIndex("UniqueId")
-                        .HasDatabaseName("ix_user_roles_unique_id");
-
-                    b.HasIndex("UserId")
-                        .HasDatabaseName("ix_user_roles_user_id");
-
-                    b.HasIndex("UserId", "RoleId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_user_roles_user_id_role_id");
-
-                    b.ToTable("user_roles", (string)null);
-                });
-
             modelBuilder.Entity("Signix.Entities.Entities.Document", b =>
                 {
                     b.HasOne("Signix.Entities.Entities.DocumentStatus", "DocumentStatus")
@@ -737,58 +424,6 @@ namespace Signix.Entities.Migrations
                     b.Navigation("DocumentStatus");
 
                     b.Navigation("SigningRoom");
-                });
-
-            modelBuilder.Entity("Signix.Entities.Entities.Permission", b =>
-                {
-                    b.HasOne("Signix.Entities.Entities.Module", "Module")
-                        .WithMany("Permissions")
-                        .HasForeignKey("ModuleId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("fk_permissions_modules_module_id");
-
-                    b.Navigation("Module");
-                });
-
-            modelBuilder.Entity("Signix.Entities.Entities.Role", b =>
-                {
-                    b.HasOne("Signix.Entities.Entities.User", "CreatedBy")
-                        .WithMany("RoleCreatedBies")
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("fk_roles_users_created_by_id");
-
-                    b.HasOne("Signix.Entities.Entities.User", "ModifiedBy")
-                        .WithMany("RoleModifiedBies")
-                        .HasForeignKey("ModifiedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("fk_roles_users_modified_by_id");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("ModifiedBy");
-                });
-
-            modelBuilder.Entity("Signix.Entities.Entities.RolePermission", b =>
-                {
-                    b.HasOne("Signix.Entities.Entities.Permission", "Permission")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_role_permissions_permissions_permission_id");
-
-                    b.HasOne("Signix.Entities.Entities.Role", "Role")
-                        .WithMany("RolePermissions")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_role_permissions_roles_role_id");
-
-                    b.Navigation("Permission");
-
-                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("Signix.Entities.Entities.SignLog", b =>
@@ -844,64 +479,6 @@ namespace Signix.Entities.Migrations
                     b.Navigation("Notary");
                 });
 
-            modelBuilder.Entity("Signix.Entities.Entities.UserModule", b =>
-                {
-                    b.HasOne("Signix.Entities.Entities.Module", "Module")
-                        .WithMany("UserModules")
-                        .HasForeignKey("ModuleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_modules_modules_module_id");
-
-                    b.HasOne("Signix.Entities.Entities.User", "User")
-                        .WithMany("UserModules")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_modules_users_user_id");
-
-                    b.Navigation("Module");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Signix.Entities.Entities.UserRole", b =>
-                {
-                    b.HasOne("Signix.Entities.Entities.User", "CreatedBy")
-                        .WithMany("UserRoleCreatedBies")
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("fk_user_roles_users_created_by_id");
-
-                    b.HasOne("Signix.Entities.Entities.User", "ModifiedBy")
-                        .WithMany("UserRoleModifiedBies")
-                        .HasForeignKey("ModifiedById")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .HasConstraintName("fk_user_roles_users_modified_by_id");
-
-                    b.HasOne("Signix.Entities.Entities.Role", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_roles_roles_role_id");
-
-                    b.HasOne("Signix.Entities.Entities.User", "User")
-                        .WithMany("UserRoleUsers")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_user_roles_users_user_id");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("ModifiedBy");
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Signix.Entities.Entities.Client", b =>
                 {
                     b.Navigation("SigningRooms");
@@ -922,25 +499,6 @@ namespace Signix.Entities.Migrations
                     b.Navigation("Documents");
                 });
 
-            modelBuilder.Entity("Signix.Entities.Entities.Module", b =>
-                {
-                    b.Navigation("Permissions");
-
-                    b.Navigation("UserModules");
-                });
-
-            modelBuilder.Entity("Signix.Entities.Entities.Permission", b =>
-                {
-                    b.Navigation("RolePermissions");
-                });
-
-            modelBuilder.Entity("Signix.Entities.Entities.Role", b =>
-                {
-                    b.Navigation("RolePermissions");
-
-                    b.Navigation("UserRoles");
-                });
-
             modelBuilder.Entity("Signix.Entities.Entities.SigningRoom", b =>
                 {
                     b.Navigation("Documents");
@@ -950,19 +508,7 @@ namespace Signix.Entities.Migrations
 
             modelBuilder.Entity("Signix.Entities.Entities.User", b =>
                 {
-                    b.Navigation("RoleCreatedBies");
-
-                    b.Navigation("RoleModifiedBies");
-
                     b.Navigation("SigningRooms");
-
-                    b.Navigation("UserModules");
-
-                    b.Navigation("UserRoleCreatedBies");
-
-                    b.Navigation("UserRoleModifiedBies");
-
-                    b.Navigation("UserRoleUsers");
                 });
 #pragma warning restore 612, 618
         }

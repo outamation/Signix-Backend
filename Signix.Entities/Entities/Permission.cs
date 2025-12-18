@@ -8,12 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Signix.Entities.Entities;
 
-[Index("Code", Name = "IDX_Permissions_Code", IsUnique = true)]
-[Index("IsActive", Name = "IDX_Permissions_IsActive")]
-[Index("IsForServicePrincipal", Name = "IDX_Permissions_IsForServicePrincipal")]
-[Index("IsForUser", Name = "IDX_Permissions_IsForUser")]
-[Index("ModuleId", Name = "IDX_Permissions_ModuleId")]
-[Index("Name", Name = "IDX_Permissions_Name", IsUnique = true)]
 public partial class Permission
 {
     [Key]

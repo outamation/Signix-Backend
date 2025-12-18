@@ -8,16 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Signix.Entities.Entities;
 
-[PrimaryKey("PermissionId", "RoleId")]
-[Index("ModifiedById", Name = "IDX_RolePermissions_ModifiedById")]
-[Index("RoleId", Name = "IDX_RolePermissions_RoleId")]
-[Index("PermissionId", Name = "IX_RolePermissions_PermissionId")]
 public partial class RolePermission
 {
     [Key]
     public int RoleId { get; set; }
 
-    [Key]
     public int PermissionId { get; set; }
 
     public bool IsActive { get; set; }

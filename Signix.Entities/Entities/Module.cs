@@ -8,9 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Signix.Entities.Entities;
 
-[Index("Code", Name = "IDX_Modules_Code", IsUnique = true)]
-[Index("IsActive", Name = "IDX_Modules_IsActive")]
-[Index("Name", Name = "IDX_Modules_Name", IsUnique = true)]
 public partial class Module
 {
     [Key]
